@@ -2,16 +2,20 @@
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>神跡酒造周邊｜3D 導覽地圖</title>
+<title>神跡酒造周邊｜3D 人物探索導覽</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font-family:'Microsoft JhengHei',system-ui,sans-serif;background:#d8eef0;color:#234336}#app{position:fixed;inset:0}canvas{display:block}.header{position:fixed;z-index:5;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;pointer-events:none}.title,.buttons{pointer-events:auto}.title{background:#fffdf4ee;border:2px solid white;border-radius:18px;padding:12px 16px;box-shadow:0 5px 16px #244a3833}.title h1{font-size:clamp(16px,3vw,23px);margin:0}.title small{color:#597b68}.buttons{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}button,.link{font:inherit;border:0;border-radius:11px;padding:10px 12px;background:#fffdf4;color:#254535;font-weight:700;cursor:pointer;text-decoration:none;box-shadow:0 3px 10px #244a3825}.link{background:#cde9ce;display:inline-block}button:hover,.link:hover{filter:brightness(.95)}#info{display:none;position:fixed;z-index:10;right:18px;top:100px;width:min(355px,calc(100vw - 36px));background:#fffdf6;border:3px solid white;border-radius:22px;padding:18px;box-shadow:0 15px 40px #23433655}#info.show{display:block}#info h2{margin:8px 0}#info p{line-height:1.7}#close{float:right;background:#f5e5d9}#hint{position:fixed;z-index:4;bottom:14px;left:50%;transform:translateX(-50%);background:#fffdf4ee;border-radius:99px;padding:10px 16px;text-align:center;font-size:13px;max-width:95vw;box-shadow:0 4px 15px #244a3825}#error{display:none;position:fixed;z-index:30;inset:15%;background:white;padding:20px;border-radius:15px}@media(max-width:650px){.header{top:8px;left:8px;right:8px}.title{padding:9px}.buttons button{padding:8px;font-size:12px}#info{top:auto;bottom:65px;right:9px;max-height:60vh;overflow:auto}}
+#nearby{position:fixed;z-index:6;bottom:65px;left:50%;transform:translateX(-50%);background:#fff5cf;border:2px solid #d4aa62;border-radius:14px;padding:10px 16px;display:none;font-weight:bold;text-align:center;max-width:90vw}#nearby.show{display:block}#mobilePad{position:fixed;z-index:7;bottom:75px;left:14px;display:none;grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,48px);gap:5px;touch-action:none}#mobilePad button{padding:0;font-size:22px;user-select:none;touch-action:none}#mobilePad .up{grid-column:2}#mobilePad .left{grid-column:1;grid-row:2}#mobilePad .down{grid-column:2;grid-row:2}#mobilePad .right{grid-column:3;grid-row:2}#mobileInteract{position:fixed;z-index:7;bottom:100px;right:14px;display:none;background:#ffe5a3}@media(pointer:coarse){#mobilePad{display:grid}#mobileInteract{display:block}#hint{bottom:8px;font-size:11px;padding:7px}}
 </style>
 </head>
 <body>
 <div id="app"></div>
-<div class="header"><div class="title"><h1>🌿 神跡酒造周邊 3D 導覽</h1><small>卡通觀光地圖・點景點名稱看介紹</small></div><div class="buttons"><button id="reset">⌂ 全景</button><button id="names">名稱：開</button></div></div>
+<div class="header"><div class="title"><h1>🌿 神跡酒造周邊 3D 導覽</h1><small>卡通觀光地圖・控制人物探索・點景點名稱看介紹</small></div><div class="buttons"><button id="reset">⌂ 全景</button><button id="names">名稱：開</button></div></div>
 <section id="info"><button id="close">✕</button><small id="category"></small><h2 id="placeName"></h2><p id="description"></p><a class="link" id="navigate" target="_blank" rel="noopener noreferrer">📍 Google 地圖查看</a></section>
-<div id="hint">🖱️ 拖曳旋轉 · 滾輪縮放 · 點擊景點「名稱」或標記</div>
+<div id="hint">🎮 WASD／方向鍵移動 · Shift 跑步 · E 查看附近景點 · 滑鼠拖曳旋轉／縮放 · 點景點名稱看介紹</div>
+<div id="nearby"></div>
+<div id="mobilePad"><button class="up" data-move="up">▲</button><button class="left" data-move="left">◀</button><button class="down" data-move="down">▼</button><button class="right" data-move="right">▶</button></div>
+<button id="mobileInteract">查看景點</button>
 <div id="error"></div>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"}}</script>
 <script type="module">
@@ -51,6 +55,69 @@ for(let i=0;i<4;i++)for(let j=0;j<3;j++)box(.7,.05,.5,(i+j)%2?'#b4d17d':'#88be6e
 function labelSprite(text){const canvas=document.createElement('canvas');canvas.width=1024;canvas.height=256;const ctx=canvas.getContext('2d');ctx.fillStyle='#fffdf4';ctx.strokeStyle='#48755c';ctx.lineWidth=10;ctx.beginPath();ctx.roundRect(12,12,1000,232,55);ctx.fill();ctx.stroke();ctx.fillStyle='#244633';ctx.font='bold 69px Microsoft JhengHei, sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,512,128,940);const tex=new THREE.CanvasTexture(canvas);tex.colorSpace=THREE.SRGBColorSpace;const sprite=new THREE.Sprite(new THREE.SpriteMaterial({map:tex,transparent:true,depthTest:false}));sprite.scale.set(4.6,1.15,1);sprite.renderOrder=10;return sprite}
 const clickable=[];const sprites=[];
 places.forEach((p)=>{const group=new THREE.Group();group.position.set(p.pos[0],0,p.pos[1]);world.add(group);const disc=new THREE.Mesh(new THREE.CylinderGeometry(.42,.48,.22,12),material('#fff6d9'));disc.position.y=.18;group.add(disc);const ball=new THREE.Mesh(new THREE.SphereGeometry(.37,12,10),material(p.color));ball.position.y=.67;group.add(ball);const label=labelSprite(p.name);label.position.set(0,1.72,0);group.add(label);sprites.push(label);for(const obj of [disc,ball,label]){obj.userData.place=p;clickable.push(obj)}});
+// === 玩家角色（使用基本幾何體製作，不需要外部 3D 模型） ===
+const player=new THREE.Group();
+player.position.set(0,0,0);
+scene.add(player);
+function playerMesh(geometry,color,x,y,z,parent=player){
+  const mesh=new THREE.Mesh(geometry,material(color));
+  mesh.position.set(x,y,z);mesh.castShadow=true;parent.add(mesh);return mesh;
+}
+playerMesh(new THREE.CylinderGeometry(.22,.27,.65,10),'#4f80d1',0,.85,0); // 衣服
+playerMesh(new THREE.SphereGeometry(.27,14,12),'#f1bf95',0,1.38,0); // 頭
+playerMesh(new THREE.SphereGeometry(.29,12,8,0,Math.PI*2,0,Math.PI*.48),'#544236',0,1.46,0); // 頭髮
+playerMesh(new THREE.ConeGeometry(.14,.28,10),'#e8c057',0,1.79,0); // 小帽飾
+const leftLeg=playerMesh(new THREE.BoxGeometry(.16,.45,.18),'#3d5675',-.13,.3,0);
+const rightLeg=playerMesh(new THREE.BoxGeometry(.16,.45,.18),'#3d5675',.13,.3,0);
+const leftArm=playerMesh(new THREE.BoxGeometry(.14,.49,.17),'#f1bf95',-.32,.88,0);
+const rightArm=playerMesh(new THREE.BoxGeometry(.14,.49,.17),'#f1bf95',.32,.88,0);
+const shadow=new THREE.Mesh(new THREE.CircleGeometry(.42,24),new THREE.MeshBasicMaterial({color:'#315a40',transparent:true,opacity:.18,depthWrite:false}));
+shadow.rotation.x=-Math.PI/2;shadow.position.y=.065;player.add(shadow);
+const keys=new Set();
+window.addEventListener('keydown',e=>{
+  if(['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(e.code))e.preventDefault();
+  keys.add(e.code);
+  if(e.code==='KeyE'&&!e.repeat)interactNearby();
+});
+window.addEventListener('keyup',e=>keys.delete(e.code));
+window.addEventListener('blur',()=>keys.clear());
+document.querySelectorAll('[data-move]').forEach(btn=>{
+  const code={up:'KeyW',down:'KeyS',left:'KeyA',right:'KeyD'}[btn.dataset.move];
+  btn.addEventListener('pointerdown',e=>{e.preventDefault();keys.add(code);btn.setPointerCapture(e.pointerId)});
+  for(const event of ['pointerup','pointercancel','lostpointercapture'])btn.addEventListener(event,()=>keys.delete(code));
+});
+document.getElementById('mobileInteract').addEventListener('click',interactNearby);
+const nearbyBox=document.getElementById('nearby');
+let nearbyPlace=null;
+function interactNearby(){if(nearbyPlace)openPlace(nearbyPlace)}
+function updateNearby(){
+  nearbyPlace=null;let nearest=2.05;
+  for(const place of places){
+    const d=Math.hypot(player.position.x-place.pos[0],player.position.z-place.pos[1]);
+    if(d<nearest){nearest=d;nearbyPlace=place}
+  }
+  if(nearbyPlace){nearbyBox.textContent='📍 已靠近 '+nearbyPlace.name+'｜按 E 或「查看景點」';nearbyBox.classList.add('show')}
+  else nearbyBox.classList.remove('show');
+}
+const moveClock=new THREE.Clock();let stepPhase=0;
+function updatePlayer(dt){
+  const dx=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'));
+  const dz=Number(keys.has('KeyS')||keys.has('ArrowDown'))-Number(keys.has('KeyW')||keys.has('ArrowUp'));
+  if(dx||dz){
+    const length=Math.hypot(dx,dz),speed=(keys.has('ShiftLeft')||keys.has('ShiftRight'))?5.5:3.0;
+    const nx=player.position.x+dx/length*speed*dt;
+    const nz=player.position.z+dz/length*speed*dt;
+    player.position.x=THREE.MathUtils.clamp(nx,-10.3,10.3);
+    player.position.z=THREE.MathUtils.clamp(nz,-8.2,8.2);
+    player.rotation.y=Math.atan2(dx,-dz);
+    stepPhase+=dt*(speed>4?15:10);
+    leftLeg.rotation.x=Math.sin(stepPhase)*.55;rightLeg.rotation.x=-Math.sin(stepPhase)*.55;
+    leftArm.rotation.x=-Math.sin(stepPhase)*.35;rightArm.rotation.x=Math.sin(stepPhase)*.35;
+  }else{
+    leftLeg.rotation.x=rightLeg.rotation.x=leftArm.rotation.x=rightArm.rotation.x=0;
+  }
+  updateNearby();
+}
 const panel=document.getElementById('info');
 function openPlace(p){document.getElementById('category').textContent=p.category;document.getElementById('placeName').textContent=p.name;document.getElementById('description').textContent=p.description;document.getElementById('navigate').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(p.search);panel.classList.add('show')}
 document.getElementById('close').onclick=()=>panel.classList.remove('show');document.getElementById('reset').onclick=()=>{camera.position.set(14,16,19);controls.target.set(0,.5,0);controls.update();panel.classList.remove('show')};let labelsVisible=true;document.getElementById('names').onclick=()=>{labelsVisible=!labelsVisible;sprites.forEach(s=>s.visible=labelsVisible);document.getElementById('names').textContent='名稱：'+(labelsVisible?'開':'關')};
@@ -58,6 +125,6 @@ const raycaster=new THREE.Raycaster();const mouse=new THREE.Vector2();let startX
 renderer.domElement.addEventListener('pointerdown',e=>{startX=e.clientX;startY=e.clientY});
 renderer.domElement.addEventListener('pointerup',e=>{if(Math.hypot(e.clientX-startX,e.clientY-startY)>7)return;const rect=renderer.domElement.getBoundingClientRect();mouse.x=((e.clientX-rect.left)/rect.width)*2-1;mouse.y=-((e.clientY-rect.top)/rect.height)*2+1;raycaster.setFromCamera(mouse,camera);const hits=raycaster.intersectObjects(clickable,false);if(hits.length)openPlace(hits[0].object.userData.place)});
 window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
-function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera)}animate();
+function animate(){requestAnimationFrame(animate);updatePlayer(Math.min(moveClock.getDelta(),.05));controls.update();renderer.render(scene,camera)}animate();
 </script>
 </body></html>
