@@ -1,5 +1,8 @@
-<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>神跡酒造｜寫實觀光園區 V11.2 文化資料與來源整合版</title><style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,'Microsoft JhengHei',sans-serif;color:#24463d;background:#b7e2e4}#app{position:fixed;inset:0}canvas{display:block}.top{position:fixed;z-index:4;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:start;gap:12px;pointer-events:none}.brand,.actions,.side,.info,.hint,.near,.pad,.interact{pointer-events:auto}.brand,.side,.info{background:#fffcf3f0;border:2px solid #fff;border-radius:20px;box-shadow:0 12px 30px #20483b30}.brand{padding:12px 18px}.brand h1{margin:0;font-size:clamp(17px,2.5vw,25px)}.brand small{color:#668277}.actions{display:flex;gap:8px}button{border:0;border-radius:12px;background:#fffdf4;color:#315547;padding:10px 13px;font:700 14px system-ui;cursor:pointer;box-shadow:0 3px 12px #234b4030}button:hover{background:#e9f5e6}.side{position:fixed;z-index:5;left:16px;top:105px;width:225px;padding:13px}.side h3{margin:0 0 10px}.placebtn{display:block;text-align:left;width:100%;margin:6px 0;background:#eef4e9}.info{position:fixed;z-index:8;right:18px;top:95px;width:min(360px,calc(100vw - 36px));padding:16px;display:none}.info.show{display:block}.info img{width:100%;height:175px;object-fit:cover;border-radius:12px}.info h2{margin:10px 0 4px}.info p{line-height:1.65;font-size:14px}.info a{display:inline-block;color:#2c7655;font-weight:bold}.close{float:right}.hint,.near{position:fixed;z-index:5;left:50%;transform:translateX(-50%);bottom:14px;background:#fffdf4e9;border-radius:30px;padding:9px 15px;font-size:12px;text-align:center}.near{bottom:60px;display:none;background:#ffe9ac}.near.show{display:block}.pad{position:fixed;bottom:60px;left:12px;z-index:7;display:none;grid-template-columns:repeat(3,46px);grid-template-rows:repeat(2,46px);gap:5px;touch-action:none}.pad button{padding:0;font-size:21px;touch-action:none}.pad [data-move=up]{grid-column:2}.pad [data-move=left]{grid-column:1;grid-row:2}.pad [data-move=down]{grid-column:2;grid-row:2}.pad [data-move=right]{grid-column:3;grid-row:2}.interact{position:fixed;z-index:7;right:14px;bottom:90px;display:none;background:#ffe4a3}@media(max-width:720px){.side{top:auto;bottom:45px;left:auto;right:8px;width:150px;padding:8px}.side h3{font-size:12px}.placebtn{font-size:11px;padding:7px;margin:3px 0}.brand{padding:8px}.brand small{display:none}.actions button{font-size:11px;padding:8px}.info{top:75px;max-height:60vh;overflow:auto}.hint{bottom:5px;font-size:10px;width:max-content;max-width:96vw}.pad,.interact{display:grid}.near{bottom:65px;max-width:80vw;font-size:11px}}
+<!DOCTYPE html><html lang="zh-Hant"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>神跡酒造｜V11.4 手機操作優化版</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,'Microsoft JhengHei',sans-serif;color:#24463d;background:#b7e2e4}#app{position:fixed;inset:0}canvas{display:block}.top{position:fixed;z-index:4;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:start;gap:12px;pointer-events:none}.brand,.actions,.side,.info,.hint,.near,.pad,.interact{pointer-events:auto}.brand,.side,.info{background:#fffcf3f0;border:2px solid #fff;border-radius:20px;box-shadow:0 12px 30px #20483b30}.brand{padding:12px 18px}.brand h1{margin:0;font-size:clamp(17px,2.5vw,25px)}.brand small{color:#668277}.actions{display:flex;gap:8px}button{border:0;border-radius:12px;background:#fffdf4;color:#315547;padding:10px 13px;font:700 14px system-ui;cursor:pointer;box-shadow:0 3px 12px #234b4030}button:hover{background:#e9f5e6}.side{position:fixed;z-index:5;left:16px;top:105px;width:225px;padding:13px}.side h3{margin:0 0 10px}.placebtn{display:block;text-align:left;width:100%;margin:6px 0;background:#eef4e9}.info{position:fixed;z-index:8;right:18px;top:95px;width:min(360px,calc(100vw - 36px));padding:16px;display:none}.info.show{display:block}.info img{width:100%;height:175px;object-fit:cover;border-radius:12px}.info h2{margin:10px 0 4px}.info p{line-height:1.65;font-size:14px}.info a{display:inline-block;color:#2c7655;font-weight:bold}.close{float:right}.hint,.near{position:fixed;z-index:5;left:50%;transform:translateX(-50%);bottom:14px;background:#fffdf4e9;border-radius:30px;padding:9px 15px;font-size:12px;text-align:center}.near{bottom:60px;display:none;background:#ffe9ac}.near.show{display:block}.pad{position:fixed;bottom:60px;left:12px;z-index:7;display:none;grid-template-columns:repeat(3,46px);grid-template-rows:repeat(2,46px);gap:5px;touch-action:none}.pad button{padding:0;font-size:21px;touch-action:none}/* V11.3: mobile D-pad must never trigger selection/copy/callout */
+.pad,.pad *,.interact{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;touch-action:none}
+.pad button{appearance:none;-webkit-appearance:none;overscroll-behavior:contain;cursor:pointer}
+.pad button:active{background:#d6ebd8;transform:scale(.96)}.pad [data-move=up]{grid-column:2}.pad [data-move=left]{grid-column:1;grid-row:2}.pad [data-move=down]{grid-column:2;grid-row:2}.pad [data-move=right]{grid-column:3;grid-row:2}.interact{position:fixed;z-index:7;right:14px;bottom:90px;display:none;background:#ffe4a3}@media(max-width:720px){.side{top:auto;bottom:45px;left:auto;right:8px;width:150px;padding:8px}.side h3{font-size:12px}.placebtn{font-size:11px;padding:7px;margin:3px 0}.brand{padding:8px}.brand small{display:none}.actions button{font-size:11px;padding:8px}.info{top:75px;max-height:60vh;overflow:auto}.hint{bottom:5px;font-size:10px;width:max-content;max-width:96vw}.pad,.interact{display:grid}.near{bottom:65px;max-width:80vw;font-size:11px}}
 
 /* v3 interface */
 .info{width:min(340px,calc(100vw - 36px));backdrop-filter:blur(10px)}
@@ -34,6 +37,30 @@ button:focus-visible,a:focus-visible{outline:3px solid #428b74;outline-offset:3p
 @media(max-width:720px){#timeMode{font-size:11px;padding:8px 6px}}
 </style><style>
 .learning-panel{margin:16px 0 12px;display:grid;gap:10px}.learning-note{font-size:12px!important;color:#86654b;background:#fff2df;padding:9px 10px;border-radius:9px}.learning-section{background:#fffaf0;border:1px solid #e6d9c4;padding:10px 12px;border-radius:12px}.learning-section h3,.learning-quiz h3{margin:0 0 5px;color:#a75b3d;font-size:14px}.learning-section p{margin:0;font-size:13px;line-height:1.65}.learning-quiz{background:#f2f7ef;border:1px solid #c7ddc5;border-radius:12px;padding:12px}.learning-quiz p{font-size:13px;line-height:1.6}.learning-choices{display:grid;gap:7px}.learning-choices button{border:1px solid #b8cbb5;background:#fffef8;text-align:left;padding:10px;border-radius:10px;color:#314c3e;cursor:pointer;white-space:normal}.learning-choices button:hover:not(:disabled){background:#dcefd8}.learning-choices button:disabled{opacity:.65;cursor:default}.learning-feedback{color:#aa6247;font-weight:600}.learning-feedback.correct{color:#287c4d}.learning-tags{font-size:12px!important;color:#667969}.learning-journal{position:fixed;z-index:22;right:18px;top:100px;width:min(340px,90vw);max-height:76vh;overflow:auto;background:#fffaf0;border:1px solid #e2d0b5;border-radius:18px;padding:18px;box-shadow:0 15px 40px #213c3240}.learning-journal[hidden]{display:none}.journal-close{float:right;border:0;background:transparent;font-size:20px;cursor:pointer}.journal-entry{border-top:1px solid #e7ddcb;padding:10px 0}.journal-entry p{font-size:12px;color:#687d6c}.journal-entry button,#journalToggle,#learningRoute button{border:1px solid #d4b99c;border-radius:9px;background:#fff5e6;color:#8c593c;padding:8px 9px;cursor:pointer}#learningRoute{margin-top:14px;padding-top:12px;border-top:1px solid #d7d8c6}#learningRoute h4{margin:0 0 6px}#learningRoute p{font-size:11px;line-height:1.6}#journalToggle{margin-top:10px;width:100%}
+
+/* V11.4 mobile usability layer — preserve existing gameplay and DOM */
+@media (pointer:coarse), (max-width:720px) {
+ html,body{overscroll-behavior:none}
+ .pad{left:max(10px,env(safe-area-inset-left));bottom:calc(54px + env(safe-area-inset-bottom));grid-template-columns:repeat(3,clamp(48px,13vw,62px));grid-template-rows:repeat(2,clamp(48px,13vw,62px));gap:6px;z-index:12}
+ .pad button{min-width:48px;min-height:48px;border-radius:16px;background:rgba(255,253,244,.94);border:2px solid rgba(75,115,87,.36);box-shadow:0 5px 15px #15392b55;font-size:24px;touch-action:none;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}
+ .pad button.pressed,.pad button:active{background:#bce7c5;transform:scale(.94);border-color:#4e9669}
+ .interact{right:max(12px,env(safe-area-inset-right));bottom:calc(91px + env(safe-area-inset-bottom));min-height:54px;min-width:90px;padding:12px 14px;border:2px solid #d9b770;border-radius:18px;touch-action:manipulation}
+ .side{right:max(8px,env(safe-area-inset-right));bottom:calc(168px + env(safe-area-inset-bottom));width:min(148px,38vw);max-height:25dvh;overflow:auto}
+ .hint{bottom:calc(4px + env(safe-area-inset-bottom));width:calc(100vw - 20px);font-size:10px;line-height:1.3;white-space:normal}
+ .near{bottom:calc(158px + env(safe-area-inset-bottom));max-width:56vw}
+ .info{top:calc(68px + env(safe-area-inset-top));max-height:65dvh;overflow:auto}
+ .top{top:calc(8px + env(safe-area-inset-top));left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));gap:5px}
+ .brand{padding:6px 8px}.brand h1{font-size:clamp(12px,3.5vw,16px)}
+ .actions{flex-wrap:wrap;justify-content:flex-end;max-width:56vw}.actions button{min-height:34px;padding:6px 8px}
+ .pad,.pad button,.interact{-webkit-tap-highlight-color:transparent}
+}
+@media (pointer:coarse) and (min-width:721px){.pad,.interact{display:grid}}
+@media (max-width:720px) and (orientation:landscape){
+ .pad{bottom:calc(12px + env(safe-area-inset-bottom));grid-template-columns:repeat(3,48px);grid-template-rows:repeat(2,48px)}
+ .interact{bottom:calc(30px + env(safe-area-inset-bottom))}
+ .side{bottom:calc(85px + env(safe-area-inset-bottom));max-height:32dvh}
+ .hint{display:none}.near{bottom:80px}.info{top:45px;max-height:72dvh}
+}
 </style></head><body><div id="app"></div><div class="top"><div class="brand"><h1>🍇 神跡酒造｜V11.1 文化探索學習版</h1><small>五大景點・文化解說・知識問答・按 E 互動</small></div><div class="actions"><button id="timeMode" title="切換白天、黃昏、夜晚">☀️ 白天</button><button id="reset">⌂ 全景</button><button id="labels">名稱：開</button><button id="cameraMode" title="切換人物移動方向">移動：鏡頭</button></div></div><aside class="side"><h3>🗺️ 景點探索</h3><div id="list"></div><div id="learningRoute"></div><button id="journalToggle" type="button">📓 開啟學習紀錄</button></aside><section class="quest" id="quest"><h3>🏅 五大景點學習任務</h3><p id="questCount">已學習 0 / 5</p><div class="quest-progress"><div id="questBar"></div></div><div id="questList"></div><p class="quest-reward" id="questReward">閱讀介紹並答對五站問答可獲得徽章</p></section><div class="quest-toast" id="questToast" role="status"></div><section class="info" id="info"><button class="close" id="close" aria-label="關閉景點介紹">✕</button><img id="photo" alt="景點照片"><small id="category"></small><h2 id="placeName"></h2><p id="description"></p><div id="learningPanel" class="learning-panel"></div><a id="maps" target="_blank" rel="noopener noreferrer">📍 地圖搜尋</a><div class="info-nav"><button id="prevPlace">← 上一站</button><button id="nextPlace">下一站 →</button></div></section><div class="near" id="near"></div><section id="learningJournal" class="learning-journal" hidden><button type="button" id="journalClose" class="journal-close">✕</button><h3>📓 我的探索學習紀錄</h3><div id="journalBody"></div></section>
 <section class="npc-dialog" id="npcDialog" role="dialog" aria-label="遊客對話">
 <h3 id="npcSpeaker">島上遊客</h3><p id="npcMessage"></p>
@@ -75,7 +102,7 @@ function completeLearning(p){
 try{for(const name of JSON.parse(localStorage.getItem('shenji_v111_learning')||'[]'))if(places.some(p=>p.name===name))explored.add(name);}catch(e){}
 
 refreshQuest();
-const scene=new THREE.Scene();scene.background=new THREE.Color('#d9e9ed');scene.fog=new THREE.Fog('#d9e9ed',48,105);const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,180);camera.position.set(30,32,42);const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.03;document.querySelector('#app').appendChild(renderer.domElement);const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,0,0);controls.enableDamping=true;controls.enablePan=false;controls.maxPolarAngle=Math.PI*.47;controls.minPolarAngle=.22;controls.minDistance=4;controls.maxDistance=72;scene.add(new THREE.HemisphereLight('#fffefa','#80938a',1.8));const sun=new THREE.DirectionalLight('#fff4de',2.35);sun.position.set(-12,22,10);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);scene.add(sun);
+const scene=new THREE.Scene();scene.background=new THREE.Color('#d9e9ed');scene.fog=new THREE.Fog('#d9e9ed',48,105);const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,180);camera.position.set(30,32,42);const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,matchMedia("(pointer:coarse)").matches?1.5:2));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.03;document.querySelector('#app').appendChild(renderer.domElement);const controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,0,0);controls.enableDamping=true;controls.enablePan=false;controls.maxPolarAngle=Math.PI*.47;controls.minPolarAngle=.22;controls.minDistance=4;controls.maxDistance=72;scene.add(new THREE.HemisphereLight('#fffefa','#80938a',1.8));const sun=new THREE.DirectionalLight('#fff4de',2.35);sun.position.set(-12,22,10);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);scene.add(sun);
 const world=new THREE.Group();scene.add(world);
 const materials=new Map();function mat(c){if(!materials.has(c))materials.set(c,new THREE.MeshStandardMaterial({color:c,roughness:.88,flatShading:true,side:THREE.DoubleSide}));return materials.get(c)}
 function mesh(g,c,x,y,z,parent=world){const m=new THREE.Mesh(g,mat(c));m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;parent.add(m);return m}
@@ -880,10 +907,37 @@ window.addEventListener('keydown',e=>{
   if(!npcDialog.classList.contains('show'))keys.add(e.code);
 });
 window.addEventListener('keyup',e=>keys.delete(e.code));window.addEventListener('blur',()=>keys.clear());
+document.addEventListener('visibilitychange',()=>{if(document.hidden)keys.clear()});
+// V11.3: prevent iOS/Android text-selection toolbar and native long-press actions.
+const mobilePad=document.querySelector('.pad');
+const blockPadGesture=e=>{if(e.cancelable)e.preventDefault()};
+['contextmenu','selectstart','dragstart'].forEach(type=>mobilePad.addEventListener(type,blockPadGesture));
+['touchstart','touchmove','touchend','touchcancel'].forEach(type=>mobilePad.addEventListener(type,blockPadGesture,{passive:false}));
 document.querySelectorAll('[data-move]').forEach(b=>{
   const code=moveCodes[b.dataset.move];
-  b.addEventListener('pointerdown',e=>{e.preventDefault();if(!npcDialog.classList.contains('show'))keys.add(code);b.setPointerCapture(e.pointerId)});
-  ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>b.addEventListener(ev,()=>keys.delete(code)));
+  b.setAttribute('type','button');b.setAttribute('aria-label',({up:'向前移動',down:'向後移動',left:'向左移動',right:'向右移動'})[b.dataset.move]);
+  const heldPointers=new Set();
+  const release=e=>{
+    if(e&&e.pointerId!==undefined)heldPointers.delete(e.pointerId);
+    else heldPointers.clear();
+    if(!heldPointers.size){keys.delete(code);b.classList.remove('pressed')}
+  };
+  b.addEventListener('pointerdown',e=>{
+    e.preventDefault();
+    if(npcDialog.classList.contains('show'))return;
+    heldPointers.add(e.pointerId);
+    b.classList.add('pressed');
+    keys.add(code);
+    try{b.setPointerCapture(e.pointerId)}catch(_){}
+  });
+  b.addEventListener('pointerup',release);
+  b.addEventListener('pointercancel',release);
+  b.addEventListener('lostpointercapture',release);
+  b.addEventListener('contextmenu',blockPadGesture);
+  b.addEventListener('selectstart',blockPadGesture);
+  b.addEventListener('dragstart',blockPadGesture);
+  b.addEventListener('click',e=>e.preventDefault());
+  window.addEventListener('blur',()=>release());
 });
 const cameraModeButton=document.querySelector('#cameraMode');
 cameraModeButton.onclick=()=>{cameraRelative=!cameraRelative;cameraModeButton.textContent='移動：'+(cameraRelative?'鏡頭':'地圖');keys.clear()};
@@ -1290,7 +1344,7 @@ renderer.domElement.addEventListener('pointerup',e=>{
   const hit=ray.intersectObjects(clickable,false);
   if(hit.length)openPlace(hit[0].object.userData.place);
 });
-window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setPixelRatio(Math.min(devicePixelRatio,matchMedia('(pointer:coarse)').matches?1.5:2));renderer.setSize(innerWidth,innerHeight)});
 // V8：以建築物的碰撞範圍建立鏡頭障礙物（不改動原本的行走碰撞）。
 const cameraObstacles=solidAreas.map(a=>new THREE.Box3(
   new THREE.Vector3(a.xmin-.15,-.1,a.zmin-.15),
